@@ -3,7 +3,6 @@ import "./styles.css";
 var num = 10;
 let num1 = 11;
 const num2 = 12;
-//global scope is runtime scope
 
 function outer() {
   function inner() {
