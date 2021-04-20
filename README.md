@@ -1,4 +1,5 @@
 # JS-Rebrush
+
 Created with CodeSandbox
 
-## global scope is runtime scope
+## Global scope is runtime scope
