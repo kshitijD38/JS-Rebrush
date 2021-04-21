@@ -8,6 +8,7 @@ function outer() {
   function inner() {
     function inner2() {
       console.log("num is ", num, num1, num2);
+      // inner2();
     }
     inner2();
   }
