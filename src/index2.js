@@ -2,7 +2,9 @@ const api = `https://randomuser.me/api`;
 
 const addUser = document.getElementById("user-btn");
 const mainApp = document.getElementById("app");
+const userList = document.getElementById("user-list");
 // console.log(addUser);
+const appState = [];
 
 addUser.addEventListener("click", async () => {
   const userData = await fetch(api, {
@@ -11,13 +13,21 @@ addUser.addEventListener("click", async () => {
     // bode:{}
   });
   const userDataJson = await userData.json();
-  console.log(userDataJson.results[0]);
+  // console.log(userDataJson.results[0]);
   const user = userDataJson.results[0];
+  appState.push(user);
+  console.log(appState);
+  domRenderer(appState);
+});
 
-  const userEle = document.createElement("div");
-  userEle.innerHTML = `<div>
-  ${user.name.title} ${user.name.first} ${user.name.last}
+const domRenderer = (stateArray) => {
+  userList.innerHTML = null;
+  stateArray.forEach((userObj) => {
+    const userEle = document.createElement("div");
+    userEle.innerHTML = `<div>
+  ${userObj.name.title} ${userObj.name.first} ${userObj.name.last}
   </div>`;
 
-  mainApp.appendChild(userEle);
-});
+    userList.appendChild(userEle);
+  });
+};
