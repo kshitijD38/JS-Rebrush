@@ -9,6 +9,15 @@ const searchInput = document.getElementById("search");
 // console.log(addUser);
 const appState = [];
 
+class User {
+  constructor(title, firstName, lastName, gender, email) {
+    this.title = title;
+    this.name = `${firstName} ${lastName}`;
+    this.gender = gender;
+    this.email = email;
+  }
+}
+
 addUser.addEventListener("click", async () => {
   const userData = await fetch(api, {
     method: "GET"
@@ -18,7 +27,14 @@ addUser.addEventListener("click", async () => {
   const userDataJson = await userData.json();
   // console.log(userDataJson.results[0]);
   const user = userDataJson.results[0];
-  appState.push(user);
+  const classUser = new User(
+    user.name.title,
+    user.name.first,
+    user.name.last,
+    user.gender,
+    user.email
+  );
+  appState.push(classUser);
   // console.log(appState);
   domRenderer(appState);
 });
@@ -27,8 +43,8 @@ const domRenderer = (stateArray) => {
   userList.innerHTML = null;
   stateArray.forEach((userObj) => {
     const userEle = document.createElement("div");
-    userEle.innerHTML = `<div>
-  ${userObj.name.title} ${userObj.name.first} ${userObj.name.last}
+    // ${userObj.name.title} ${userObj.name.first} ${userObj.name.last}
+    userEle.innerHTML = `<div>${userObj.title} ${userObj.name}
     <ol> 
       <li>Gender: ${userObj.gender}</li> 
       <li>Email: ${userObj.email}</li>
@@ -43,8 +59,8 @@ searchInput.addEventListener("keyup", (e) => {
   // console.log(e);
   const filteredAppState = appState.filter(
     (user) =>
-      user.name.first.toLowerCase().includes(searchInput.value.toLowerCase()) ||
-      user.name.last.toLowerCase().includes(searchInput.value.toLowerCase()) ||
+      user.name.toLowerCase().includes(searchInput.value.toLowerCase()) ||
+      // user.name.last.toLowerCase().includes(searchInput.value.toLowerCase()) ||
       user.gender.toLowerCase().includes(searchInput.value.toLowerCase()) ||
       user.email.toLowerCase().includes(searchInput.value.toLowerCase())
   );
@@ -56,7 +72,7 @@ searchInput.addEventListener("keyup", (e) => {
 sortBtn.addEventListener("click", () => {
   const sortData = [...appState];
   sortData.sort((a, b) => {
-    if (a.name.first > b.name.first) {
+    if (a.name > b.name) {
       return 1;
     } else {
       return -1;
@@ -69,7 +85,7 @@ sortBtn.addEventListener("click", () => {
 deSortBtn.addEventListener("click", () => {
   const sortData = [...appState];
   sortData.sort((a, b) => {
-    if (a.name.first < b.name.first) {
+    if (a.name < b.name) {
       return 1;
     } else {
       return -1;
