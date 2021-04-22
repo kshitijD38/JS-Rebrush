@@ -12,4 +12,6 @@ Created with CodeSandbox
 
 ## Filter, map returns new array and not forEach it modifies the existing
 
-## filter will always be a subset of original **\***
+## filter will always be a subset of original
+
+## Empty is false (truthy or falsey)
