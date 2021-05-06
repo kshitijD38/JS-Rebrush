@@ -18,7 +18,9 @@ class User {
   }
 }
 
-addUser.addEventListener("click", async () => {
+addUser.addEventListener("click", onAddUser);
+
+async function onAddUser() {
   const userData = await fetch(api, {
     method: "GET"
     // headers
@@ -37,13 +39,12 @@ addUser.addEventListener("click", async () => {
   appState.push(classUser);
   // console.log(appState);
   domRenderer(appState);
-});
+}
 
 const domRenderer = (stateArray) => {
   userList.innerHTML = null;
   stateArray.forEach((userObj) => {
     const userEle = document.createElement("div");
-    // ${userObj.name.title} ${userObj.name.first} ${userObj.name.last}
     userEle.innerHTML = `<div>${userObj.title} ${userObj.name}
     <ol> 
       <li>Gender: ${userObj.gender}</li> 
@@ -100,6 +101,7 @@ window.addEventListener("scroll", () => {
   const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
 
   if (clientHeight + scrollTop >= scrollHeight - 50) {
-    console.log({ clientHeight, scrollHeight, scrollTop });
+    // console.log({ clientHeight, scrollHeight, scrollTop });
+    onAddUser();
   }
 });
