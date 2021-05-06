@@ -94,3 +94,12 @@ deSortBtn.addEventListener("click", () => {
 
   domRenderer(sortData);
 });
+
+// scrollHeight = clientHeight + scrollTop
+window.addEventListener("scroll", () => {
+  const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
+
+  if (clientHeight + scrollTop >= scrollHeight - 50) {
+    console.log({ clientHeight, scrollHeight, scrollTop });
+  }
+});

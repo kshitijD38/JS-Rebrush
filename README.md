@@ -15,3 +15,5 @@ Created with CodeSandbox
 ## filter will always be a subset of original
 
 ## Empty is false (truthy or falsey)
+
+## Client heigth, scroll height and scroll top are needed for infinite scrolling
