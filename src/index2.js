@@ -114,6 +114,7 @@ const option = {
 };
 const callbackIO = () => {
   console.log("target arrived");
+  onAddUser();
 };
 const observer = new IntersectionObserver(callbackIO, option);
 observer.observe(targetElem);
