@@ -1,3 +1,4 @@
+import "./styles.css";
 const api = `https://randomuser.me/api`;
 
 const addUser = document.getElementById("user-btn");
@@ -102,6 +103,17 @@ window.addEventListener("scroll", () => {
 
   if (clientHeight + scrollTop >= scrollHeight - 50) {
     // console.log({ clientHeight, scrollHeight, scrollTop });
-    onAddUser();
+    // onAddUser();
   }
 });
+
+const targetElem = document.getElementById("observer");
+const option = {
+  root: null,
+  threshold: 1.0
+};
+const callbackIO = () => {
+  console.log("target arrived");
+};
+const observer = new IntersectionObserver(callbackIO, option);
+observer.observe(targetElem);
